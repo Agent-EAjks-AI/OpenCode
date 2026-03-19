@@ -1,4 +1,4 @@
-import type { AuthOuathResult } from "@opencode-ai/plugin"
+import type { AuthOAuthResult } from "@opencode-ai/plugin"
 import { NamedError } from "@opencode-ai/util/error"
 import * as Auth from "@/auth/effect"
 import { runPromiseInstance } from "@/effect/runtime"
@@ -118,7 +118,7 @@ export namespace ProviderAuth {
           ),
         )
       })
-      const pending = new Map<ProviderID, AuthOuathResult>()
+      const pending = new Map<ProviderID, AuthOAuthResult>()
 
       const methods = Effect.fn("ProviderAuth.methods")(function* () {
         return Record.map(hooks, (item) =>
