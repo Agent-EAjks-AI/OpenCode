@@ -25,6 +25,11 @@ initProjectors()
 
 export namespace Server {
   const log = Log.create({ service: "server" })
+  const bind = (app: Hono) => ({
+    app,
+    fetch: app.fetch.bind(app),
+    request: app.request.bind(app),
+  })
 
   const zipped = compress()
 
@@ -34,7 +39,7 @@ export namespace Server {
     return false
   }
 
-  export const Default = lazy(() => ControlPlaneRoutes())
+  export const Default = lazy(() => bind(ControlPlaneRoutes()))
 
   export const ControlPlaneRoutes = (opts?: { cors?: string[] }): Hono => {
     const app = new Hono()
